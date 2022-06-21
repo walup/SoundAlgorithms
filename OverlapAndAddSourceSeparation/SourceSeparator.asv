@@ -1,0 +1,51 @@
+classdef SourceSeparator
+    
+    properties
+        delays;
+        nMics;
+        nSources;
+    end
+    
+    
+    
+   methods
+       %Recibe un arreglo con el delay de cada microfono
+       %Se incluye el de referencia que no tiene delays
+       function obj = SourceSeparator(delays)
+           obj.nMics = size(delays, 2);
+           obj.nSources = size(delays, 1);
+           obj.delays = delays;
+       end
+       
+       %Aquí solo se separan dos fuentes
+       function separatedSignal = separateSignal(obj, index, tArr, audioSignals)
+          shiftedSignals = zeros(size(audioSignals), size(audioSignals));
+          for i = 1:size(audioSignals, 2)
+              
+              
+          end
+           
+           
+           
+          timeDelay = 0;
+          if(index == 1)
+              timeDelay = obj.delay1;
+          elseif(index == 2)
+              timeDelay = obj.delay2;
+          else
+              disp("Este algoritmo separa unicamente entre dos fuentes")
+          end
+          
+          signalShifter = AudioShifter();
+          shiftedAudio1 = signalShifter.shiftSignal(audioMic1, tArr, timeDelay);
+          
+          separatedSignal = (shiftedAudio1 + audioMic2)/2;
+           
+       end
+       
+       
+   end
+    
+    
+    
+end
